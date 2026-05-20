@@ -24,7 +24,7 @@ addon_info = AddonInfo(
 	addon_description=_("""Melhora a acessibilidade na edição de texto em campos problemáticos do Bruno, restaurando a leitura dos caracteres digitados, o feedback de navegação do cursor e os avisos de foco para usuários do NVDA.
 """),
 	# version
-	addon_version="1.0",
+	addon_version="1.0.0",
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
 	addon_changelog=_(""""""),
