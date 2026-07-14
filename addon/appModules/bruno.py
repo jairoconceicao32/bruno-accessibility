@@ -20,23 +20,18 @@ def _say(text):
 	speech.cancelSpeech()
 	queueHandler.queueFunction(queueHandler.eventQueue, speech.speakMessage, text)
 
-
 def _say_char(ch):
 	if not ch:
 		return
 	speech.cancelSpeech()
 	queueHandler.queueFunction(queueHandler.eventQueue, speech.speakTypedCharacters, ch)
-
-
 def _ia2_text(obj):
 	try:
 		return obj.makeTextInfo(textInfos.POSITION_ALL).text or ""
 	except (AttributeError, RuntimeError, NotImplementedError):
 		return ""
 
-
 class BrunoMousetrapField(NVDAObject):
-
 	@property
 	def states(self):
 		return super().states - {controlTypes.State.OFFSCREEN}
@@ -140,9 +135,7 @@ class BrunoMousetrapField(NVDAObject):
 		"kb:home":       "moveCaretHome",
 	}
 
-
 class AppModule(appModuleHandler.AppModule):
-
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self._memory  = {}

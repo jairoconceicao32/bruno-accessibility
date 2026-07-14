@@ -1,9 +1,7 @@
-
+import html
 import gettext
 from pathlib import Path
-
 import markdown
-
 from .typings import AddonInfo
 
 
@@ -31,7 +29,7 @@ def md2html(
 	else:
 		summary = _(addon_info["addon_summary"])
 	version = addon_info["addon_version"]
-	title = f"{summary} {version}"
+	title = html.escape(f"{summary} {version}", quote=True)
 	lang = source.parent.name.replace("_", "-")
 	headerDic = {
 		'[[!meta title="': "# ",
@@ -41,12 +39,13 @@ def md2html(
 		mdText = f.read()
 	for k, v in headerDic.items():
 		mdText = mdText.replace(k, v, 1)
-	htmlText = markdown.markdown(mdText, extensions=mdExtensions)
+	safeMdText = html.escape(mdText)
+	htmlText = markdown.markdown(safeMdText, extensions=mdExtensions)
 	# Optimization: build resulting HTML text in one go instead of writing parts separately.
 	docText = "\n".join(
 		(
 			"<!DOCTYPE html>",
-			f'<html lang="{lang}">',
+			f'<html lang="{html.escape(lang, quote=True)}">',
 			"<head>",
 			'<meta charset="UTF-8">',
 			'<meta name="viewport" content="width=device-width, initial-scale=1.0">',
